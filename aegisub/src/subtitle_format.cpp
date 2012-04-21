@@ -360,7 +360,7 @@ wxString SubtitleFormat::GetWildcards(int mode) {
 		wxArrayString cur = mode == 0 ? format->GetReadWildcards() : format->GetWriteWildcards();
 		if (cur.empty()) continue;
 
-		for_each(cur.begin(), cur.end(), bind(&wxString::Prepend, _1, "*."));
+		std::for_each(cur.begin(), cur.end(), bind(&wxString::Prepend, _1, "*."));
 		copy(cur.begin(), cur.end(), std::back_inserter(all));
 		final += "|" + format->GetName() + " (" + wxJoin(cur, ',') + ")|" + wxJoin(cur, ';');
 	}
