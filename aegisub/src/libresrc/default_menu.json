@@ -154,6 +154,7 @@
         { "submenu" : "main/video/set zoom", "text" : "Set &Zoom" },
         { "submenu" : "main/video/override ar", "text" : "Override &AR" },
         { "command" : "video/show_overscan" },
+        { "command" : "video/force_bt601" },
         {},
         { "command" : "video/jump" },
         { "command" : "video/jump/start" },

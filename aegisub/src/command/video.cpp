@@ -677,6 +677,24 @@ struct video_show_overscan : public validator_video_loaded {
 	}
 };
 
+/// Show a mask over the video.
+struct video_force_bt601 : public validator_video_loaded {
+	CMD_NAME("video/force_bt601")
+	STR_MENU("Force BT.601")
+	STR_DISP("Force BT.601")
+	STR_HELP("Use BT.601 conversion matrix regardless video resolution")
+	CMD_TYPE(COMMAND_VALIDATE | COMMAND_TOGGLE)
+
+	bool IsActive(const agi::Context *) {
+		return OPT_GET("Video/Force BT.601")->GetBool();
+	}
+
+	void operator()(agi::Context *c) {
+		OPT_SET("Video/Force BT.601")->SetBool(!OPT_GET("Video/Force BT.601")->GetBool());
+		c->videoDisplay->Render();
+	}
+};
+
 /// Set zoom to 100%.
 class video_zoom_100: public validator_video_attached {
 public:
@@ -807,6 +825,7 @@ namespace cmd {
 		reg(new video_play);
 		reg(new video_play_line);
 		reg(new video_show_overscan);
+		reg(new video_force_bt601);
 		reg(new video_stop);
 		reg(new video_zoom_100);
 		reg(new video_zoom_200);
